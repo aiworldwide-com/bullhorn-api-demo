@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OpenAPITools/openapi-generator-cli/master/apps/generator-cli/src/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.1.0",
+    "generators": {
+      "bullhorn-api": {
+        "generatorName": "typescript-fetch",
+        "output": "src/lib/api/generated",
+        "glob": "boa-swagger.json",
+        "additionalProperties": {
+          "modelPropertyNaming": "camelCase",
+          "npmName": "bullhorn-api-client",
+          "supportsES6": true,
+          "stringEnums": true,
+          "withInterfaces": true,
+          "enumPropertyNaming": "PascalCase",
+          "typescriptThreePlus": true,
+          "prefixParameterInterfaces": true
+        }
+      }
+    }
+  }
+}

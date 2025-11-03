@@ -1,0 +1,1452 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bullhorn Open API",
+    "version": "v1.0.0"
+  },
+  "paths": {
+    "/api/Readings": {
+      "get": {
+        "tags": [
+          "Readings"
+        ],
+        "summary": "Facility view of Packet data with dynamic Engineering Label columns.",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date for readings (date only, inclusive from midnight: YYYY-MM-DD format)",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date for readings (date only, inclusive to end of day: YYYY-MM-DD format)",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "filterOption",
+            "in": "query",
+            "description": "Filter option (1-3): 1=All records, 2=All non-alarm records, 3=All alarm records",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "facilityType",
+            "in": "query",
+            "description": "Optional facility type filter (1-5): 1=Rectifier, 2=Test Station, 3=AC Monitor, 4=Meter Reader, 5=Other",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": { }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": { }
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": { }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": { }
+              },
+              "application/json": {
+                "schema": { }
+              },
+              "text/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unit/{Id}": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Retrieve a single Unit Record using the Id as an input param",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitViewModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitViewModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unit": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Retrieve List of Units",
+        "parameters": [
+          {
+            "name": "UnitType",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "UnitName",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FacilityId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SerialNumber",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UnitStatus",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "LastPacketDate",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "SortColumn",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortOrder",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitViewModelPagedList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitViewModelPagedList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitViewModelPagedList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unit/UnitChangeFeeds": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Retrieve lists of Units change data capture",
+        "parameters": [
+          {
+            "name": "watermark",
+            "in": "query",
+            "description": "watermark",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDCUnitModelWatermarkResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDCUnitModelWatermarkResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CDCUnitModelWatermarkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnitGroup": {
+      "get": {
+        "tags": [
+          "UnitGroup"
+        ],
+        "summary": "Retrieve a list of UnitGroup Records",
+        "parameters": [
+          {
+            "name": "active",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnitGroupViewModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnitGroupViewModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnitGroupViewModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnitDataPoint/{Id}": {
+      "get": {
+        "tags": [
+          "UnitDataPoint"
+        ],
+        "summary": "Retrieve a single record of UnitDataPoints",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointViewModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointViewModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnitDataPoint/DataPointChangeFeeds": {
+      "get": {
+        "tags": [
+          "UnitDataPoint"
+        ],
+        "summary": "Retrieve lists of UnitDataPoints change data capture",
+        "parameters": [
+          {
+            "name": "watermark",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointChangeFeedModelWatermarkResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointChangeFeedModelWatermarkResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointChangeFeedModelWatermarkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Tenant": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "summary": "Retrieve list of tenants",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TenantViewModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TenantViewModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TenantViewModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Packet": {
+      "get": {
+        "tags": [
+          "Packet"
+        ],
+        "summary": "Retrieve list of packets",
+        "parameters": [
+          {
+            "name": "watermark",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PacketViewModelWatermarkResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PacketViewModelWatermarkResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PacketViewModelWatermarkResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnitGroup/UnitGroupMapping": {
+      "post": {
+        "tags": [
+          "UnitGroup"
+        ],
+        "summary": "Endpoint for retrieving unit group mapping by passing in list of unit group ids",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitGroupMappingRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitGroupMappingRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitGroupMappingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitGroupMappingResponsePagedList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitGroupMappingResponsePagedList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitGroupMappingResponsePagedList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnitDataPoint": {
+      "post": {
+        "tags": [
+          "UnitDataPoint"
+        ],
+        "summary": "Retrieve a list of UnitDataPoints",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitDataPointRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitDataPointRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitDataPointRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointViewModelPagedList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointViewModelPagedList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitDataPointViewModelPagedList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UnitDataPoint"
+        ],
+        "summary": "Update UnitDataPoints Recordswith request params",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnitDataPointRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnitDataPointRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnitDataPointRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Token": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Retrieve a token by using clientId and clientSecret",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CDCUnitModel": {
+        "type": "object",
+        "properties": {
+          "previousValue": {
+            "$ref": "#/components/schemas/GenericCDCUnit"
+          },
+          "newValue": {
+            "$ref": "#/components/schemas/GenericCDCUnit"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CDCUnitModelWatermarkResult": {
+        "type": "object",
+        "properties": {
+          "nextMark": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CDCUnitModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataPointChangeFeed": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataPointName": {
+            "type": "string",
+            "nullable": true
+          },
+          "engineeringLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "operation": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unitDataPointIdentity": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataPointViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataPointName": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isMeasurement": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "engineeringLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GenericCDCUnit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenantUnitId": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "operation": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unitIdentity": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PacketViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unitId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serialNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "facilityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "packetType": {
+            "type": "string",
+            "nullable": true
+          },
+          "receivedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transmissionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataPointViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PacketViewModelWatermarkResult": {
+        "type": "object",
+        "properties": {
+          "nextMark": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PacketViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TenantViewModel": {
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenantCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TokenRequest": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitDataPointChangeFeedModel": {
+        "type": "object",
+        "properties": {
+          "previousValue": {
+            "$ref": "#/components/schemas/DataPointChangeFeed"
+          },
+          "newValue": {
+            "$ref": "#/components/schemas/DataPointChangeFeed"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitDataPointChangeFeedModelWatermarkResult": {
+        "type": "object",
+        "properties": {
+          "nextMark": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitDataPointChangeFeedModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitDataPointRequestDTO": {
+        "type": "object",
+        "properties": {
+          "unitGroupIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isExcluded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isMeasurement": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "noCache": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "unitType": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unitStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastPacketDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "sortColumn": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortOrder": {
+            "type": "string",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitDataPointViewModel": {
+        "type": "object",
+        "properties": {
+          "unitId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isExcluded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenantUnitId": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitGroupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unitType": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lastPacketDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unitStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitDataPointId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "defaultName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataPointName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isMeasurement": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "engineeringLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPacketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "currentValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPacketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "previousValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "isInAlarm": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "wasInAlarm": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "valueType": {
+            "type": "string",
+            "nullable": true
+          },
+          "measurementType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitDataPointViewModelPagedList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitDataPointViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitGroupMappingRequest": {
+        "type": "object",
+        "properties": {
+          "unitGroupIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitGroupMappingResponse": {
+        "type": "object",
+        "properties": {
+          "unitId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unitGroupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitGroupMappingResponsePagedList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitGroupMappingResponse"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitGroupViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "parentGroupId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unitGroupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAllUnits": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tenantUnitId": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitType": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lastPacketDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "unitStatus": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitViewModelPagedList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnitViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUnitDataPointRequestDTO": {
+        "type": "object",
+        "properties": {
+          "unitDataPointRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "nullable": true
+          },
+          "excludedFlags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter a valid token",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

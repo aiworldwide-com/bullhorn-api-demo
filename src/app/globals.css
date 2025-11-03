@@ -1,0 +1,371 @@
+@import 'tailwindcss';
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    /* American Innovations Brand Colors 
+     * Based on the corporate style guide:
+     * - Primary: Pantone 300 C (#0064AB) - Main brand blue
+     * - Secondary: Dark Blue (#112D4C) - Used for dark backgrounds
+     * - Accent: Pantone 109 C (#FFE100) - Yellow accent for highlights
+     * - Supporting: Light blue, gray tones for variety
+     */
+    --ai-blue: #0064ab; /* Pantone 300 C */
+    --ai-dark-blue: #112d4c; /* Secondary Color */
+    --ai-light-blue: #00a1de; /* Pantone 299 C */
+    --ai-yellow: #ffe100; /* Pantone 109 C - Accent */
+    --ai-gray: #8d8d8d; /* Gray */
+    --ai-light-gray: #bad5ea; /* Pantone 290 C */
+    --ai-black: #000000;
+    --ai-white: #ffffff;
+
+    /* Base theme using AI brand colors */
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.42 0.15 250); /* AI Blue */
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.82 0.05 205); /* AI Light Blue */
+    --secondary-foreground: oklch(0.145 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.85 0.18 85); /* AI Yellow */
+    --accent-foreground: oklch(0.145 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.42 0.15 250); /* AI Blue for focus rings */
+    --chart-1: oklch(0.42 0.15 250); /* AI Blue */
+    --chart-2: oklch(0.82 0.05 205); /* AI Light Blue */
+    --chart-3: oklch(0.85 0.18 85); /* AI Yellow */
+    --chart-4: oklch(0.25 0.02 250); /* AI Dark Blue */
+    --chart-5: oklch(0.55 0 0); /* AI Gray */
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.42 0.15 250); /* AI Blue */
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.145 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.42 0.15 250);
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+}
+
+.dark {
+    --background: oklch(0.25 0.02 250); /* AI Dark Blue background */
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.25 0.02 250); /* AI Dark Blue */
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.25 0.02 250);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.82 0.05 205); /* AI Light Blue for dark mode primary */
+    --primary-foreground: oklch(0.145 0 0);
+    --secondary: oklch(0.42 0.15 250); /* AI Blue */
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.35 0.02 250);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.85 0.18 85); /* AI Yellow - keeps accent bright */
+    --accent-foreground: oklch(0.145 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: oklch(0.35 0.02 250);
+    --input: oklch(0.35 0.02 250);
+    --ring: oklch(0.82 0.05 205); /* AI Light Blue for focus rings */
+    --chart-1: oklch(0.82 0.05 205); /* AI Light Blue */
+    --chart-2: oklch(0.42 0.15 250); /* AI Blue */
+    --chart-3: oklch(0.85 0.18 85); /* AI Yellow */
+    --chart-4: oklch(0.45 0.02 250);
+    --chart-5: oklch(0.55 0 0); /* AI Gray */
+    --sidebar: oklch(0.25 0.02 250); /* AI Dark Blue */
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.82 0.05 205); /* AI Light Blue */
+    --sidebar-primary-foreground: oklch(0.145 0 0);
+    --sidebar-accent: oklch(0.35 0.02 250);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(0.35 0.02 250);
+    --sidebar-ring: oklch(0.82 0.05 205);
+}
+
+.theme-login-one {
+    --primary: #ce2a2d;
+    --primary-foreground: #fff;
+    --ring: #ce2a2d9c;
+    --radius: 0rem;
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+
+    font-family: var(--font-sans);
+
+    a {
+        color: var(--primary);
+    }
+
+    [data-slot='card'] {
+        border-radius: 0rem;
+        box-shadow: none;
+    }
+}
+
+.theme-login-two {
+    --primary: #035fa8;
+    --primary-foreground: #fff;
+    --ring: #035fa89c;
+    font-family: var(--font-serif);
+
+    a {
+        color: var(--primary);
+    }
+}
+
+.theme-login-three {
+    --primary: #22c55e;
+    --primary-foreground: #000;
+    --ring: #22c55e;
+    --radius: 1.5rem;
+
+    font-family: var(--font-manrope);
+
+    a {
+        color: var(--primary);
+    }
+
+    [data-slot='card'] {
+        @apply shadow-xl;
+    }
+
+    [data-slot='input'] {
+        @apply dark:bg-input;
+    }
+}
+
+@theme inline {
+    --font-sans: var(--font-inter), 'Proxima Nova', var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+    --font-mono: var(--font-geist-mono);
+    --font-primary: var(--font-inter), 'Proxima Nova', system-ui, -apple-system, sans-serif;
+    --font-helvetica: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    --font-arial: Arial, sans-serif;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --animate-accordion-down: accordion-down 0.2s ease-out;
+    --animate-accordion-up: accordion-up 0.2s ease-out;
+
+    @keyframes accordion-down {
+        from {
+            height: 0;
+        }
+        to {
+            height: var(--radix-accordion-content-height);
+        }
+    }
+
+    @keyframes accordion-up {
+        from {
+            height: var(--radix-accordion-content-height);
+        }
+        to {
+            height: 0;
+        }
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: var(--font-sans);
+    }
+}
+
+@layer utilities {
+    /* American Innovations Brand Utilities */
+    .ai-blue {
+        color: var(--ai-blue);
+    }
+    .bg-ai-blue {
+        background-color: var(--ai-blue);
+    }
+    .border-ai-blue {
+        border-color: var(--ai-blue);
+    }
+
+    .ai-yellow {
+        color: var(--ai-yellow);
+    }
+    .bg-ai-yellow {
+        background-color: var(--ai-yellow);
+    }
+    .border-ai-yellow {
+        border-color: var(--ai-yellow);
+    }
+
+    .ai-dark-blue {
+        color: var(--ai-dark-blue);
+    }
+    .bg-ai-dark-blue {
+        background-color: var(--ai-dark-blue);
+    }
+    .border-ai-dark-blue {
+        border-color: var(--ai-dark-blue);
+    }
+
+    .ai-light-blue {
+        color: var(--ai-light-blue);
+    }
+    .bg-ai-light-blue {
+        background-color: var(--ai-light-blue);
+    }
+    .border-ai-light-blue {
+        border-color: var(--ai-light-blue);
+    }
+
+    /* Typography utilities */
+    .font-proxima {
+        font-family: var(--font-primary);
+    }
+    .font-helvetica {
+        font-family: var(--font-helvetica);
+    }
+    .font-arial {
+        font-family: var(--font-arial);
+    }
+
+    /* Brand accent highlights */
+    .accent-highlight {
+        position: relative;
+    }
+    .accent-highlight::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: var(--ai-yellow);
+    }
+
+    /* Calendar Heatmap Styles */
+    .heatmap-container-centered {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .react-calendar-heatmap {
+        line-height: 1;
+        font-size: 12px;
+    }
+
+    .react-calendar-heatmap rect {
+        width: 12px;
+        height: 12px;
+    }
+
+    .react-calendar-heatmap .react-calendar-heatmap-month-label {
+        font-size: 12px;
+    }
+
+    .react-calendar-heatmap .react-calendar-heatmap-weekday-label {
+        font-size: 10px;
+    }
+
+    .react-calendar-heatmap .color-empty {
+        fill: #ebedf0;
+    }
+
+    .react-calendar-heatmap .color-scale-1 {
+        fill: #9be9a8;
+    }
+
+    .react-calendar-heatmap .color-scale-2 {
+        fill: #40c463;
+    }
+
+    .react-calendar-heatmap .color-scale-3 {
+        fill: #30a14e;
+    }
+
+    .react-calendar-heatmap .color-scale-4 {
+        fill: #216e39;
+    }
+
+    .react-calendar-heatmap text {
+        fill: #586069;
+        font-size: 10px;
+    }
+
+    .react-calendar-heatmap rect:hover {
+        stroke: #555;
+        stroke-width: 1px;
+    }
+
+    /* Dark mode support for heatmap */
+    .dark .react-calendar-heatmap .color-empty {
+        fill: #161b22;
+    }
+
+    .dark .react-calendar-heatmap text {
+        fill: #8b949e;
+    }
+
+    .dark .react-calendar-heatmap rect:hover {
+        stroke: #c9d1d9;
+        stroke-width: 1px;
+    }
+}
+
+/* Leaflet Map Styles */
+@import 'leaflet/dist/leaflet.css';
+
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+
+/* Fix for Leaflet marker icons in Next.js */
+.leaflet-default-icon-path {
+    background-image: url('https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png');
+}
