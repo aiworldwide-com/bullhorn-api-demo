@@ -46,7 +46,7 @@
         "@radix-ui/react-toggle": "^1.1.10",
         "@radix-ui/react-toggle-group": "^1.1.11",
         "@radix-ui/react-tooltip": "^1.2.8",
-        "@scalar/api-reference-react": "^0.8.0",
+        "@scalar/api-reference-react": "^0.8.70",
         "@tanstack/react-query": "^5.85.9",
         "@tanstack/react-query-devtools": "^5.85.9",
         "@types/leaflet": "^1.9.20",
